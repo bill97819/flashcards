@@ -1,0 +1,53 @@
+<ion-view view-title="{{deckname}}">
+    <ion-content class="padding">
+        <!-- no questions available -->
+        <div ng-show="emptyquestion">
+            <br>
+            <br>
+            <h3 class="center">This deck is empty. Add questions to it in the Manage tab.</h3>
+        </div>
+        <!-- quiz in progress -->
+        <div ng-show="!emptyquestion && !done">
+            <!-- question -->
+            <div ng-show="inProgress">
+                <h2>Question {{count + 1}}.</h2>
+                <br>
+                <h3>{{question}}</h3>
+                <form>
+                    <label class="item item-input">
+                        <input type="text" ng-model="text" placeholder="Answer" required />
+                    </label>
+                    <button class="button button-block button-positive" ng-click="check(text);text='';">Submit</button>
+                </form>
+            </div>
+            <!-- result -->
+            <div ng-show="!inProgress">
+                <div ng-show="correct">
+                    <br>
+                    <br>
+                    <h3 class="center">That is correct!</h3>
+                    <br>
+                    <br>
+                </div>
+                <div ng-show="!correct">
+                    <br>
+                    <br>
+                    <h3 class="center">Sorry, that is an incorrect answer.</h3>
+                    <h4 class="center">The correct answer is: {{answer}}</h4>
+                    <br>
+                    <br>
+                </div>
+                <button class="button button-block button-positive" ng-click="continue()">Continue</button>
+            </div>
+            <!-- score -->
+            <h3 align="right" class="score">Current Score: {{score}}/{{numquestions}}</h3>
+        </div>
+        <!-- quiz over -->
+        <div ng-show="!emptyquestion && done">
+            <br>
+            <br>
+            <br>
+            <h3 class="center">Quiz is over. You scored {{score}}/{{numquestions}}.</h3>
+        </div>
+    </ion-content>
+</ion-view>

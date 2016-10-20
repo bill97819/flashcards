@@ -1,0 +1,12 @@
+/* Empty. Add your own CSS if you like */
+
+.score {
+    position: absolute !important;
+    bottom: 10px !important;
+    right: 10px !important;
+}
+
+.center {
+    text-align: center;
+    vertical-align: center;
+}

@@ -1,0 +1,31 @@
+<ion-view view-title="Manage Decks">
+    <ion-content class="padding">
+        <button class="button button-block button-balanced" ng-click="adding=true">Create a New Deck</button>
+        <!-- Add new deck -->
+        <div ng-show="adding">
+            <form>
+                <label class="item item-input">
+                    <input type="text" ng-model="text" placeholder="Title" required>
+                </label>
+                <br>
+                <div class="button-bar">
+                    <button class="button button-outline button-assertive" ng-click="text='';adding=false;">Cancel</button>
+                    <button class="button button-positive" ng-click="submit(text);text='';adding=false;">Submit</button>
+                </div>
+            </form>
+            <br>
+        </div>
+        <div ng-show="emptydeck">
+            <p>No decks available</p>
+            <p>Create a deck to get started</p>
+        </div>
+        <div ng-show="!emptydeck">
+            <ul class="list">
+                <li ng-repeat="x in decks | orderBy: 'title'" class="item item-button-right">
+                    {{x.title}}
+                    <button class="button ion-edit button-balanced" ng-click="editD(x)"></button>
+                </li>
+            </ul>
+        </div>
+    </ion-content>
+</ion-view>

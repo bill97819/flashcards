@@ -1,0 +1,73 @@
+<ion-view view-title="{{deckname}}">
+    <ion-content class="padding">
+        <!-- edit title -->
+        <div>
+            <button class="button button-block button-balanced" ng-click="editname=true">Change Title</button>
+            <form ng-show="editname">
+                <label class="item item-input">
+                    <input type="text" ng-model="text" placeholder="Title" required>
+                </label>
+                <br>
+                <div class="button-bar">
+                    <button class="button button-outline button-assertive" ng-click="editname=false">Cancel</button>
+                    <button class="button button-positive" ng-click="submitQ(text);editname=false;">Submit</button>
+                </div>
+                <br>
+            </form>
+        </div>
+        <!-- add new card -->
+        <button class="button icon-left button-calm ion-plus-round" ng-click="add=true">Add Flashcard</button>
+        <div ng-show="add">
+            <form>
+                <br>
+                <label class="item item-input">
+                    <input type="text" ng-model="addquestion" placeholder="Question" required />
+                </label>
+                <label class="item item-input">
+                    <input type="text" ng-model="addanswer" placeholder="Answer" required />
+                </label>
+                <br>
+                <div class="button-bar">
+                    <button class="button button-outline button-assertive" ng-click="addquestion='';addanswer='';add=false;">Cancel</button>
+                    <button class="button button-positive" ng-click="addQ(addquestion,addanswer);addquestion='';addanswer='';add=false;">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div ng-show="emptyquestion">
+            <p>No questions available</p>
+            <p>Please add questions</p>
+        </div>
+        <!-- edit single card -->
+        <div ng-show="!emptyquestion">
+            <br>
+            <ul class="list">
+                <li ng-repeat="x in questions track by $index" class="item item-text-wrap">
+                    <div ng-show="!qaedit[$index]">
+                        <p>Question: {{x.qtext}}</p>
+                        <p>Answer: {{x.atext}}</p>
+                    </div>
+                    <div ng-show="qaedit[$index]">
+                        <form>
+                            <br>
+                            <label class="item item-input">
+                                <input type="text" ng-model="qs[$index]" placeholder="Question: {{x.qtext}}" required />
+                            </label>
+                            <label class="item item-input">
+                                <input type="text" ng-model="as[$index]" placeholder="Answer: {{x.atext}}" required />
+                            </label>
+                            <br>
+                            <div class="button-bar">
+                                <button class="button button-outline button-assertive" ng-click="qaedit[$index]=false">Cancel</button>
+                                <button class="button button-positive" ng-click="editQA(x.id,$index);qaedit[$index]=false;">Submit</button>
+                                <br>
+                            </div>
+                            <button class="button button-block button-assertive" ng-click="removeQ(x,$index)">Delete</button>
+                        </form>
+                    </div>
+                    <button class="button button-block button-balanced" ng-click="qaedit[$index]=true" ng-show="!qaedit[$index]">Edit</button>
+                </li>
+            </ul>
+        </div>
+        <button class="button button-block button-assertive" ng-click="removeD()">Delete Deck</button>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,18 @@
+<ion-view view-title="Quiz">
+    <ion-content class="padding">
+        <h2>Flashcards App</h2>
+        <div ng-show="emptydeck">
+            <p>No decks available.</p>
+            <p>Create a deck in the Manage tab to get started.</p>
+        </div>
+        <div ng-show="!emptydeck">
+            <h5>Choose a deck below to begin quiz</h5>
+            <ul class="list">
+                <li ng-repeat="x in decks | orderBy: 'title'" class="item item-button-right">
+                    {{x.title}}
+                    <button class="button ion-chevron-right button-balanced" ng-click="start(x)"></button>
+                </li>
+            </ul>
+        </div>
+    </ion-content>
+</ion-view>
